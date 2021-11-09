@@ -1,14 +1,10 @@
+import pyttsx3
 
-def google_speak(text):
-    import os
-    from gtts import gTTS
-    from playsound import playsound
-    tts = gTTS(text=text, lang='en')
-    tts.save("speech.mp3")
-    playsound("speech.mp3")
-    os.remove("speech.mp3")
-
-
-google_speak("Hello, world!")
+def speak(text):
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
     
-
+    
+    
+   #using pyttsx3 with default windows voice for the time being, until i dont find some solution for any other voice.
