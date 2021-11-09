@@ -62,7 +62,7 @@ def wishMe():
 
 
 def chat(conversation_mode):      #here conversation mode is referenced to either text or speech input
-    with randomstuff.Client(api_key='TNRJha2HoiAg') as client: 
+    with randomstuff.Client(api_key='YOUR-API-KEY-HERE') as client:  #API KEY REQUIRED HERE
         while True: 
             chat_message=take_input(conversation_mode)
             response = client.get_ai_response(chat_message,bot="Knick", master="Arsh")
@@ -128,7 +128,7 @@ def showmagic():
                 srch=query
                 print("Searching for : ",srch," on youtube")
                 print("opening youtube...")
-                sss=(f"https://www.youtube.com/results?search_query="+                   #webbrowser.open_new_tab
+                sss=(f"https://www.youtube.com/results?search_query="+
                         "+".join(srch))
                 pywhatkit.playonyt(sss)
                 playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
@@ -297,7 +297,7 @@ def showmagic():
                 speak("I have made a note of that.")
 
         elif "weather" in statement:
-            api_key="71c09db031fcbe97124ca01bdd74e9b3"
+            api_key="YOUR-API-KEY-HERE"  #API KEY REQUIRED HERE
             base_url="https://api.openweathermap.org/data/2.5/weather?"
             playsound._playsoundWin(os.path.join('soundeffects\sfx',"cityname.mp3"))
             print("\nwhats the city?")
@@ -349,7 +349,7 @@ def showmagic():
         elif 'ask' in statement:
             speak("I can answer to computational and geographical questions and what question do you want to ask now")
             query=take_input(knick_input_mode)
-            client = wolframalpha.Client('8V8THP-PULKKHPT8P')
+            client = wolframalpha.Client('YOUR-API-KEY-HERE') #API KEY REQUIRED HERE
             res = client.query(query)
             answer = next(res.results).text
             print(answer)
