@@ -1,7 +1,7 @@
-[![issues](https://img.shields.io/github/issues/iamDyeus/KnickAI)]
-[![forks](https://img.shields.io/github/forks/iamDyeus/KnickAI)]
-[![starts](https://img.shields.io/github/stars/iamDyeus/KnickAI)]
-[![social](https://img.shields.io/github/license/iamDyeus/KnickAI)]
+![issues](https://img.shields.io/github/issues/iamDyeus/KnickAI)
+![forks](https://img.shields.io/github/forks/iamDyeus/KnickAI)
+![starts](https://img.shields.io/github/stars/iamDyeus/KnickAI)
+![social](https://img.shields.io/github/license/iamDyeus/KnickAI)
 
 # About Knick - An AI Assistant  🧠
 [Knick](http://bit.ly/knickassistant) is a virtual artificial intelligence project, fully developed in Python. It can handle our minor, intermediate as well as heavy tasks which we usually don’t want to do or don't wish to do.
