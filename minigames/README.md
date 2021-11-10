@@ -7,4 +7,4 @@ these scripts won't work yet because i didn't got the time to finish all of it, 
 * Removing boring games
 * and last check if all games work fine with the assistant
 
-Thanks for Reading 🤗
+
