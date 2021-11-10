@@ -54,7 +54,7 @@ All the API's mentioned below are Free
 
 ## Contributing
 * Pull Requests (PRs) are welcome :relaxed:
-* For major changes, please open an issue first to discuss what you would like to change.
+* For major changes, please discuss on [discussions](https://github.com/iamDyeus/KnickAI/discussions) about what you would like to change.
 * Try to add useful comments
 * Please make sure to update tests as appropriate.
 
