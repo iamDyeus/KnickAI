@@ -163,10 +163,11 @@ def showmagic():
 
         elif "screenshot" in statement:
             time.sleep(3)
-            pywhatkit.take_screenshot(file_name="knick_screenshot")
-            print("i have taken your ScreenShot")
+            import pyscreenshot
+            image = pyscreenshot.grab()
+            image.save("knickscreenshot.png")
             playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
-            time.sleep(3)
+            time.sleep(2)
 
         elif "handwriting" in statement:
             speak("Enter the text you want to Convert ?")
