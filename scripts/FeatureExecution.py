@@ -162,10 +162,15 @@ def showmagic():
             time.sleep(5)
 
         elif "screenshot" in statement:
-            time.sleep(3)
+            elif "screenshot" in statement:
+            import random
+            time.sleep(1.5)
             import pyscreenshot
             image = pyscreenshot.grab()
-            image.save("knickscreenshot.png")
+            r = random.randint(1,20000000)
+            file_name=("knickscreenshot"+ str(r) +".png")
+            image.save(file_name)
+            print("Screenshot saved as : ",file_name)
             playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
             time.sleep(2)
 
