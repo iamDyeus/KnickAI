@@ -1,3 +1,6 @@
+![knick banner](https://user-images.githubusercontent.com/87000693/147037011-0de85407-236b-46ae-b104-6762555624ec.png)
+
+
 ![starts](https://img.shields.io/github/stars/iamDyeus/KnickAI)
 ![issues](https://img.shields.io/github/issues/iamDyeus/KnickAI)
 ![forks](https://img.shields.io/github/forks/iamDyeus/KnickAI)
