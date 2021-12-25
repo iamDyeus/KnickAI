@@ -471,9 +471,9 @@ def showmagic():
             time.sleep(3)
     
         elif 'play game' in statement:
-            speak('opening mini games manager') #to be added
-            #minigamesmanager.playgame()
-            print('error dev is still working on it')
+            speak('opening mini games manager') 
+            from minigames import minigamesmanager
+            minigamesmanager.playgame()
             time.sleep(3)
 
         elif 'insult me' in statement:
