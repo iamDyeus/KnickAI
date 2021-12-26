@@ -162,7 +162,6 @@ def showmagic():
             time.sleep(5)
 
         elif "screenshot" in statement:
-            elif "screenshot" in statement:
             import random
             time.sleep(1.5)
             import pyscreenshot
