@@ -89,7 +89,7 @@ def showmagic():
         playsound.playsound(os.path.join('soundeffects\sfx',"howcanihelpyounow.mp3"))
         print("\nTell Me How Can I Help you Now ?")
         statement=take_input(knick_input_mode)
-        
+
         if statement==None:
             print("No Input Detected!\n")
             continue
@@ -107,7 +107,7 @@ def showmagic():
         elif "sleep" in statement:
             speak("Assistant Paused.")
             print("ok i am sleeping\nPress 'W' whenever You Want Me to Resume")
-            print("   ")
+            print("  ")
             from console import assistant_pause,assistant_resumed
             print(assistant_pause)
             print("  ")
@@ -120,7 +120,6 @@ def showmagic():
 
         elif "hi" in statement or "hello" in statement :
             print("I am very seroius about my work,\nso if you wanna have chat with me. just use the 'Lets Chat' command ")
-            #playsound._playsoundWin(os.path.join('soundeffects\sfx','replytohello.mp3'))
             time.sleep(1)
 
         elif "open youtube and search for" in statement or "open youtube and search" in statement:
@@ -170,7 +169,7 @@ def showmagic():
             file_name=("knickscreenshot"+ str(r) +".png")
             image.save(file_name)
             print("Screenshot saved as : ",file_name)
-            playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
+            playsound._playsoundWin(os.path.join('soundeffects\sfx',"done.wav"))
             time.sleep(2)
 
         elif "handwriting" in statement:
@@ -178,14 +177,14 @@ def showmagic():
             vars=input("Enter the Text which you want to convert into Your Handwriting. \n>>")
             pywhatkit.text_to_handwriting(string=vars,save_to="handwriting.png")
             print("Your Text to HandWriting Conversion is Done!\nTIP: To check your Result, Check for handwriting.png File")
-            playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
+            playsound._playsoundWin(os.path.join('soundeffects\sfx',"done.wav"))
             time.sleep(3)
 
         elif "image conversion" in statement :
             ima=input("Enter the Path of Image :")
             pywhatkit.image_to_ascii_art(imgpath=ima,output_file="knick_asciiart.txt")
             print("i have Made Your ASCII art and also saved it.")
-            playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
+            playsound._playsoundWin(os.path.join('soundeffects\sfx',"done.wav"))
             time.sleep(3)
 
         elif "edge" in statement:
@@ -235,18 +234,18 @@ def showmagic():
             speak("Clearing system Cache....")
             speak("please do not touch anything for a while, the automated process is starting.")
             keyboard.press_and_release('win+R')
-            keyboard.write("%temp%")
-            time.sleep(0.4)
-            keyboard.press_and_release("enter")
-            print("clearing cache in process....")
-            time.sleep(2)
-            keyboard.press_and_release("ctrl+a")
-            keyboard.press_and_release("del")
+            keyboard.write("%temp%",delay=0.3)
             time.sleep(0.7)
             keyboard.press_and_release("enter")
-            print ('Starting the removal of the file !')
-            print("If you see any Error, just select Do this for all and click Skip")
-            speak("If you see any Error, just select Do this for all and click Skip")
+            print("clearing cache in process....")
+            time.sleep(2.6)
+            keyboard.press_and_release("ctrl+a")
+            time.sleep(0.5)
+            keyboard.press_and_release("del+shift")
+            time.sleep(0.7)
+            keyboard.press_and_release("enter")
+            print ('Starting the removal of the file !\n')
+            print("If you see any Error, just Delete the Temp Folder manually.")
             time.sleep(3)
 
         elif "open my inbox" in statement:
@@ -291,7 +290,7 @@ def showmagic():
                 winshell.recycle_bin().empty(
                     confirm=True, show_progress=False, sound=True
                 )
-                speak("you should press enter if the dialog box appears.")
+                speak("you should press enter if any dialog box appears.")
                 time.sleep(1.3)
                 speak("Recycle Bin Emptied")
                 
@@ -517,7 +516,8 @@ def showmagic():
         else:
             print('Unable to Read Your Command \nError: Unknown Command')
             playsound._playsoundWin(os.path.join('soundeffects\sfx','systemdown.mp3'))
-            speak("i am sorry, my Responses are limited, you must ask the right question.")
+            playsound._playsoundWin(os.path.join('soundeffects\sfx','responses.wav'))
+            time.sleep(2)
 
 
 

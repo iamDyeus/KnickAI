@@ -8,11 +8,12 @@ from console import intro_header
 
 def assistant_introduction():
     print(intro_header)
-    speak("Allow Me to Introduce Myself, I am knick, A virtual artificial intelligence, and i am here to assist you, With a variety of tasks as best i can.")
+    playsound._playsoundWin(os.path.join('soundeffects\sfx',"intro.wav"))
     time.sleep(2)
 
+
 def takeCommand():     
-		print("Listening....")
+		print("Listening.....")
 		r = sr.Recognizer()
 		r.dynamic_energy_threshold=False
 		r.energy_threshold=4000
@@ -22,7 +23,7 @@ def takeCommand():
 			audio = r.listen(source)
 			said=""
 		try:
-			print("Recognizing....")
+			print("Recognizing.....")
 			said = r.recognize_google(audio,language='en-in')
 			print(f"You Said : {said}\n")
 		except sr.UnknownValueError :
@@ -31,6 +32,7 @@ def takeCommand():
 		except sr.RequestError as e:
 			print("Could not request results, check your internet connection; {0}".format(e))
 			return "None"
+
 		return said.lower()
 
 def wishMe():
@@ -58,3 +60,13 @@ def note(text):
         f.write(text)
     subprocess.Popen(["notepad.exe", file_name])
 
+
+def any_random(var):
+    import random
+    choice=var[random.randint(0,len(var)-1)]
+    return choice
+
+''' USAGE : 
+salutation=["Hello","Hi","Hey","Howdy","Hola","Bonjour","Greetings","Good Morning","Good Afternoon","Good Evening"]
+print(any_random(salutation))
+'''

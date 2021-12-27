@@ -11,3 +11,4 @@ wikipedia==1.4.0
 winshell==0.6
 wolframalpha==5.0.0
 pyscreenshot==3.0
+gTTS==2.2.3
