@@ -1,5 +1,6 @@
 keyboard==0.13.5
 playsound==1.2.2
+PyAudio==0.2.11
 pyjokes==0.6.0
 pyttsx3==2.90
 pywhatkit==5.1
