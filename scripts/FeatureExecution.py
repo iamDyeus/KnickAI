@@ -474,7 +474,7 @@ def showmagic():
             minigamesmanager.playgame()
             time.sleep(3)
 
-        elif 'insult me' in statement:
+        elif 'insult me' in statement or 'deadpool' in statement:
             try:
                 evil=requests.get(url='https://evilinsult.com/generate_insult.php?lang=en&type=json')
                 data=evil.json()
