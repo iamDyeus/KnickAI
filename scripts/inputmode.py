@@ -30,10 +30,10 @@ def mode_select():
 a=mode_select()
 if a==0:
 	#takecommandti()
-	print("things realted to text input happen in main script :)")
+	print("things related to text input happen in main script :)")
 elif a==1:
 	#takecommandsi()	
-	print("things realted to speech_input happen in main script :)")
+	print("things related to speech_input happen in main script :)")
 '''
 
 

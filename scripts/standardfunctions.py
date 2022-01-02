@@ -3,14 +3,12 @@ import subprocess
 import os
 import playsound
 import speech_recognition as sr
-from speech import speak
 from console import intro_header
 
 def assistant_introduction():
     print(intro_header)
     playsound._playsoundWin(os.path.join('soundeffects\sfx',"intro.wav"))
     time.sleep(2)
-
 
 def takeCommand():     
 		print("Listening.....")
@@ -51,7 +49,6 @@ def wishMe():
         playsound._playsoundWin(os.path.join('soundeffects\sfx',"ge.mp3"))
         print("Hello,Good Evening")
 
-
 def note(text):
     from datetoday import datetime
     date = datetime.datetime.now()
@@ -60,13 +57,23 @@ def note(text):
         f.write(text)
     subprocess.Popen(["notepad.exe", file_name])
 
-
 def any_random(var):
     import random
     choice=var[random.randint(0,len(var)-1)]
     return choice
-
-''' USAGE : 
-salutation=["Hello","Hi","Hey","Howdy","Hola","Bonjour","Greetings","Good Morning","Good Afternoon","Good Evening"]
-print(any_random(salutation))
 '''
+USAGE for any_random(var) : 
+hi=["Hello","Hi","Hey","Howdy","Hola","Bonjour"]
+print(any_random(hi))
+'''
+def desktop_notification(text_for_notification,duration_of_notification):
+    # import win10toast
+    from win10toast import ToastNotifier
+    # create an object to ToastNotifier class
+    n = ToastNotifier()
+    n.show_toast("KnickAI",text_for_notification, duration = duration_of_notification)
+
+def cleaner():
+    if os.path.exists("pywhatkit_dbs.txt"):
+        os.remove("pywhatkit_dbs.txt") #i don't know why this comes but yes, i'll remove it for sure xD
+        #this function can be used to remove more unwanted folders too.

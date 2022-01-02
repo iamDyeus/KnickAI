@@ -11,7 +11,7 @@ def enginestart():
     with Progress() as progress:
 
         task1 = progress.add_task("[red]Starting Engine...", total=200)
-        task2 = progress.add_task("[green]Initialising Modules...", total=345)
+        task2 = progress.add_task("[green]Initialising Modules...", total=300)
         task3 = progress.add_task("[cyan]Importing all Prefrences...", total=100)
         while not progress.finished:
             progress.update(task1, advance=0.9)

@@ -6,7 +6,6 @@ import time
 import subprocess
 import requests
 import wolframalpha
-import randomstuff
 import os
 import playsound
 import winshell
@@ -14,6 +13,7 @@ import speech_recognition as sr
 import pywhatkit
 import keyboard
 from inputmode import mode_select
+from standardfunctions import cleaner
 
 def takeCommand():     
 		print("Listening....")
@@ -60,17 +60,17 @@ def wishMe():
         print("Hello,Good Evening")
     time.sleep(2)
 
-
 def chat(conversation_mode):      #here conversation mode is referenced to either text or speech input
-    with randomstuff.Client(api_key='YOUR-API-KEY-HERE') as client:  #API KEY REQUIRED HERE
+    '''with randomstuff.Client(api_key='YOUR-API-KEY-HERE') as client:  #API KEY REQUIRED HERE
         while True: 
             chat_message=take_input(conversation_mode)
             response = client.get_ai_response(chat_message,bot="Knick", master="Arsh")
             print(response.message)
             playsound._playsoundWin(os.path.join('soundeffects\sfx',"notification.mp3"))
-            if 'bye' in chat_message :
-              break        
-    time.sleep(1)
+            if 'bye' in chat_message : 
+                break        
+    time.sleep(1)'''
+    print("Chat Feature is Down till next Update\nSelected chat Mode : ",conversation_mode)
 
 def note(text):
     date = datetime.datetime.now()
@@ -78,9 +78,6 @@ def note(text):
     with open(file_name, "w") as f:
         f.write(text)
     subprocess.Popen(["notepad.exe", file_name])
-
-
-
 
 #here is the exceution functions i made it, so that the main code looks a bit clean XD
 def showmagic():
@@ -95,18 +92,18 @@ def showmagic():
             continue
         
         elif "good bye" in statement or "ok bye" in statement or "stop" in statement or "bye" in statement or "quit" in statement:
-
             playsound._playsoundWin(os.path.join('soundeffects\sfx',"shuttingdown.mp3"))
             print("\n")
             print('    Your Personal Assistant Knick is Shutting Down,Good bye.     ')
             playsound._playsoundWin(os.path.join('soundeffects\sfx','powerdown.mp3'))
             print("~   The BOT went Offline    ~")
             time.sleep(4)
+            cleaner()
             quit()
- 
-        elif "sleep" in statement:
+        
+        elif "pause" in statement:
             speak("Assistant Paused.")
-            print("ok i am sleeping\nPress 'W' whenever You Want Me to Resume")
+            print("ok i am paused\nPress 'W' whenever You Want Me to Resume")
             print("  ")
             from console import assistant_pause,assistant_resumed
             print(assistant_pause)
@@ -117,9 +114,22 @@ def showmagic():
                     print(assistant_resumed)
                     print("  ")
                     break
+            continue
+        
+        elif "hibernate" in statement or "sleep" in statement: #note this feature only works if there is a mic connected. 
+            speak("Hibernating.")
+            print("please use the wakeword to wake me up, till then i'll be going undercover.")
+            print("Available Wake Words :\n1.Assistant activate\n2.wake up assistant")
+            time.sleep(2)
+            os.system('python scripts/Hotword/hotword_detection.pyw')
+            quit()
 
         elif "hi" in statement or "hello" in statement :
-            print("I am very seroius about my work,\nso if you wanna have chat with me. just use the 'Lets Chat' command ")
+            from dialoges import hello
+            from standardfunctions import any_random
+            hello_greating=any_random(hello)
+            print(hello_greating,"\n(NOTE:if you wanna have chat with me. just use the 'Lets Chat' command)")
+            speak(hello_greating)
             time.sleep(1)
 
         elif "open youtube and search for" in statement or "open youtube and search" in statement:
@@ -140,7 +150,7 @@ def showmagic():
                 print("youtube is open now.")
                 playsound._playsoundWin(os.path.join('soundeffects\sfx',"taskcompleted.mp3"))
                 time.sleep(5)
-        
+       
         elif 'open github' in statement:
             print('Opening GitHub...')
             webbrowser.open_new_tab("https://github.com/")
@@ -234,7 +244,8 @@ def showmagic():
             speak("Clearing system Cache....")
             speak("please do not touch anything for a while, the automated process is starting.")
             keyboard.press_and_release('win+R')
-            keyboard.write("%temp%",delay=0.3)
+            time.sleep(1)
+            keyboard.write("%temp%",delay=0.1)
             time.sleep(0.7)
             keyboard.press_and_release("enter")
             print("clearing cache in process....")
@@ -437,6 +448,7 @@ def showmagic():
         elif 'your name' in statement or 'what is your name' in statement :
             speak("my name is knick, how could you forget me :-(")
             print('my name is knick your A.I assistant')
+            print(" (ㆆ_ㆆ) "*3)
             time.sleep(3)
 
         elif 'what is your slogan' in statement or 'what is your motive' in statement:
@@ -464,17 +476,19 @@ def showmagic():
             time.sleep(3)
         
         elif 'chat' in statement: 
-            print('\nChat Feature is Still in ALPHA vesion,\nso please have patience while using it.')
+            #print('\nChat Feature is Still in ALPHA vesion,\nso please have patience while using it.')
             chat(knick_input_mode)
+            from console import bug
+            print(bug)
             time.sleep(3)
-    
+   
         elif 'play game' in statement:
             speak('opening mini games manager') 
             from minigames import minigamesmanager
             minigamesmanager.playgame()
             time.sleep(3)
 
-        elif 'insult me' in statement or 'deadpool' in statement:
+        elif 'insult me' in statement:
             try:
                 evil=requests.get(url='https://evilinsult.com/generate_insult.php?lang=en&type=json')
                 data=evil.json()
@@ -487,9 +501,9 @@ def showmagic():
 
         elif 'say' in statement or 'pronounce' in statement:
             speak("okay, type the text.")
-            say=input('What you Want Me To Say : ')
-            print('user entered :',say)
-            speak(say)
+            what_to_say=input('What you Want Me To Say : ')
+            print('user entered :',what_to_say)
+            speak(what_to_say)
             time.sleep(2)
 
         elif "change input mode" in statement:
@@ -497,8 +511,11 @@ def showmagic():
             showmagic()
 
         elif "thanks" in statement:
-            print("NP :)")
-            speak("no problem, always there to help you.")
+            from dialoges import np
+            from standardfunctions import any_random
+            reply_to_thanks=any_random(np)
+            print(reply_to_thanks)
+            speak(reply_to_thanks)
 
         elif "support assistance" in statement:
             speak("you can join the official discord server of knick, if you have any problem while using the assistant.")
@@ -512,12 +529,11 @@ def showmagic():
             else:
                 print("you need to select from 'y' or 'n' only, IDOT!")
                 continue
-        
+       
         else:
             print('Unable to Read Your Command \nError: Unknown Command')
             playsound._playsoundWin(os.path.join('soundeffects\sfx','systemdown.mp3'))
             playsound._playsoundWin(os.path.join('soundeffects\sfx','responses.wav'))
             time.sleep(2)
-
 
 
