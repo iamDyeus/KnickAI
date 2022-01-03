@@ -2,7 +2,7 @@ keyboard==0.13.5
 playsound==1.2.2
 pyjokes==0.6.0
 pyttsx3==2.90
-pywhatkit==5.1
+pywhatkit==5.2
 requests==2.26.0
 rich==10.12.0
 SpeechRecognition==3.8.1
