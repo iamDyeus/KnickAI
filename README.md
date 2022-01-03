@@ -53,9 +53,10 @@ All the API's mentioned below are Free
 *   **Can Do Keyword Research** with the help of Google Trends (e.g 'lets do some keyword research')
 
 ### Features
+*   **Supports working in Background and activation on Hotword.** (e.g 'Hibernate' or 'sleep')
 *   **Can change the Input Mode Anytime** i.e text input or Speech Input (e.g 'change input mode')
 *   **Exit/Quit the Assistant** (e.g 'bye knick, see you soon!')
-*   **Pause the Assistant** for a while (e.g 'knick pause for a while' or 'knick go to sleep')
+*   **Pause the Assistant** for a while (e.g 'knick pause for a while')
 *   **Support Assistance** for helping the user encounting any error/bug (e.g 'knick open support assistance')
 
 ## Contributing
