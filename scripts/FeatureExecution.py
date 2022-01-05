@@ -3,6 +3,7 @@ import datetime
 import wikipedia
 import webbrowser
 import time
+import random
 import subprocess
 import requests
 import wolframalpha
@@ -13,7 +14,9 @@ import speech_recognition as sr
 import pywhatkit
 import keyboard
 from inputmode import mode_select
-from standardfunctions import cleaner
+from standardfunctions import *
+from dialogue import *
+from api_keys import *
 
 def takeCommand():     
 		print("Listening....")
@@ -70,21 +73,26 @@ def chat(conversation_mode):      #here conversation mode is referenced to eithe
             if 'bye' in chat_message : 
                 break        
     time.sleep(1)'''
-    print("Chat Feature is Down till next Update\nSelected chat Mode : ",conversation_mode)
+    print("Chat Feature is Down till next Update ",conversation_mode)
 
 def note(text):
-    date = datetime.datetime.now()
-    file_name = str(date).replace(":", "-") + "-note.txt"
-    with open(file_name, "w") as f:
+    '''date = datetime.datetime.now()'''
+    r = random.randint(1,20000000)
+    note_name=("knick-note"+ str(r))
+    with open(note_name, "w") as f:
         f.write(text)
-    subprocess.Popen(["notepad.exe", file_name])
+    print("Note saved as : ",note_name)
+    subprocess.Popen(["notepad.exe", note_name])
 
 #here is the exceution functions i made it, so that the main code looks a bit clean XD
 def showmagic():
     knick_input_mode= mode_select()
     while True:
-        playsound.playsound(os.path.join('soundeffects\sfx',"howcanihelpyounow.mp3"))
-        print("\nTell Me How Can I Help you Now ?")
+        #playsound.playsound(os.path.join('soundeffects\sfx',"howcanihelpyounow.mp3"))
+        #print("\nTell Me How Can I Help you Now ?")
+        ask=any_random(asking)
+        print("\n",ask)
+        speak(ask+".")
         statement=take_input(knick_input_mode)
 
         if statement==None:
@@ -121,12 +129,19 @@ def showmagic():
             print("please use the wakeword to wake me up, till then i'll be going undercover.")
             print("Available Wake Words :\n1.Assistant activate\n2.wake up assistant")
             time.sleep(2)
-            os.system('python scripts/Hotword/hotword_detection.pyw')
+            subprocess.call('start scripts/Hotword/hotword_detection.pyw', shell=True)
+            time.sleep(0.5)
+            quit() #when this part of the code worked,beleive me... it was cool as Af.
+
+        elif "no thanks"==statement:
+            speak("ok, i will sleep for some time then.")
+            print("ok, i will sleep for some time then.")
+            print("\nuse the wakeword to awake me, till then i'll be going undercover.")
+            time.sleep(2)
+            subprocess.call('start scripts/Hotword/hotword_detection.pyw', shell=True)
             quit()
 
-        elif "hi" in statement or "hello" in statement :
-            from dialoges import hello
-            from standardfunctions import any_random
+        elif "hi"==statement or "hello" in statement :
             hello_greating=any_random(hello)
             print(hello_greating,"\n(NOTE:if you wanna have chat with me. just use the 'Lets Chat' command)")
             speak(hello_greating)
@@ -307,42 +322,48 @@ def showmagic():
                 
         elif "note" in statement or "remember this" in  statement:
                 print("What would you like me to write down?")
+                speak("What would you like me to write down?")
                 note_text = take_input(knick_input_mode)
                 note(note_text)
-                speak("I have made a note of that.")
+                print("I have made a note of that.\n")
+                playsound._playsoundWin(os.path.join('soundeffects\sfx',"done.wav"))
 
         elif "weather" in statement:
-            api_key="YOUR-API-KEY-HERE"  #API KEY REQUIRED HERE
-            base_url="https://api.openweathermap.org/data/2.5/weather?"
-            playsound._playsoundWin(os.path.join('soundeffects\sfx',"cityname.mp3"))
-            print("\nwhats the city?")
-            city_name= take_input(knick_input_mode)
-            complete_url=base_url+"appid="+api_key+"&q="+city_name
-            response = requests.get(complete_url)
-            x=response.json()
-            if x["cod"]!="404":
-                y=x["main"]
-                current_temperature = y["temp"]
-                current_humidiy = y["humidity"]
-                z = x["weather"]
-                weather_description = z[0]["description"]
-                
-                print(" Temperature in kelvin unit = " +
-                    str(current_temperature) +
-                    "\nhumidity (in percentage) = " +
-                    str(current_humidiy) +
-                    "\ndescription = " +
-                    str(weather_description))
-                speak("Temperature in kelvin unit is " +
-                    str(current_temperature) +
-                    "\nhumidity in percentage is " +
-                    str(current_humidiy) +
-                    "\ndescription  " +
-                    str(weather_description))
+            #API KEY REQUIRED HERE
+            if weather_api_key=="YOUR API KEY HERE":   #{this part can be comment out later,and indexing below shall be fixed
+                print("You need to get an API key first!\n")
+                break
+            else:                                      #}
+                base_url="https://api.openweathermap.org/data/2.5/weather?"
+                playsound._playsoundWin(os.path.join('soundeffects\sfx',"cityname.mp3"))
+                print("\nwhats the city?")
+                city_name= take_input(knick_input_mode)
+                complete_url=base_url+"appid="+weather_api_key+"&q="+city_name     #weather_api_key is the api key here
+                response = requests.get(complete_url)
+                x=response.json()
+                if x["cod"]!="404":
+                    y=x["main"]
+                    current_temperature = y["temp"]
+                    current_humidiy = y["humidity"]
+                    z = x["weather"]
+                    weather_description = z[0]["description"]
+                    
+                    print(" Temperature in kelvin unit = " +
+                        str(current_temperature) +
+                        "\nhumidity (in percentage) = " +
+                        str(current_humidiy) +
+                        "\ndescription = " +
+                        str(weather_description))
+                    speak("Temperature in kelvin unit is " +
+                        str(current_temperature) +
+                        "\nhumidity in percentage is " +
+                        str(current_humidiy) +
+                        "\ndescription  " +
+                        str(weather_description))
 
-            else:
-                speak(" City Not Found. ")
-                print(" City Not Found ")
+                else:
+                    speak(" City Not Found. ")
+                    print(" City Not Found ")
 
         elif 'time' in statement:
             strTime=datetime.datetime.now().strftime("%H:%M:%S")
@@ -362,12 +383,16 @@ def showmagic():
                 time.sleep(3)
 
         elif 'ask' in statement:
-            speak("I can answer to computational and geographical questions and what question do you want to ask now")
-            query=take_input(knick_input_mode)
-            client = wolframalpha.Client('YOUR-API-KEY-HERE') #API KEY REQUIRED HERE
-            res = client.query(query)
-            answer = next(res.results).text
-            print(answer)
+            if wolfram_api_key=="YOUR API KEY HERE":
+                print("You need to get an API key first!")
+                break
+            else:
+                speak("I can answer to computational and geographical questions and what question do you want to ask now")
+                query=take_input(knick_input_mode)
+                client = wolframalpha.Client(wolfram_api_key) #API KEY REQUIRED HERE
+                res = client.query(query)
+                answer = next(res.results).text
+                print(answer)
 
         elif 'wikipedia' in statement:
             speak("Searching Wikipedia about it...")
@@ -499,6 +524,14 @@ def showmagic():
             except:
                 speak("the insult generation server is down,you may try again later.")
 
+        elif 'i want to dictate' in statement:
+            speak("okay opening dictation option.")
+            time.sleep(0.5)
+            keyboard.press_and_release('win+H')
+            time.sleep(0.5)
+            playsound._playsoundWin(os.path.join('soundeffects\sfx','done.wav'))
+            continue
+
         elif 'say' in statement or 'pronounce' in statement:
             speak("okay, type the text.")
             what_to_say=input('What you Want Me To Say : ')
@@ -511,8 +544,6 @@ def showmagic():
             showmagic()
 
         elif "thanks" in statement:
-            from dialoges import np
-            from standardfunctions import any_random
             reply_to_thanks=any_random(np)
             print(reply_to_thanks)
             speak(reply_to_thanks)
@@ -529,9 +560,9 @@ def showmagic():
             else:
                 print("you need to select from 'y' or 'n' only, IDOT!")
                 continue
-       
+
         else:
-            print('Unable to Read Your Command \nError: Unknown Command')
+            print('Unable to Read Your Command\nError: Unknown Command')
             playsound._playsoundWin(os.path.join('soundeffects\sfx','systemdown.mp3'))
             playsound._playsoundWin(os.path.join('soundeffects\sfx','responses.wav'))
             time.sleep(2)

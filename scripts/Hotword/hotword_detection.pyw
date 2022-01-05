@@ -34,14 +34,17 @@ def desktop_notification(text_for_notification,duration_of_notification):
 
 hotword="assistant activate"
 hotword2="wake up assistant"
+hotword3="assistant activate"
+#more hotwords can be added here by the user if needed.
+#but please learn to pronounce them properly first, or else you'll get messed up.
 
 def work_in_background():
 	desktop_notification("Assistant running in background",5)
 	while True:
 		Listening=background_listening()
-		if hotword in Listening or hotword2 in Listening:
+		if hotword in Listening or hotword2 in Listening or hotword3 in Listening:
 			desktop_notification("Assistant is now running in foreground",4)
-			os.system("python scripts/Hotword/assistant_direct.py")
+			os.system("python scripts/Hotword/awake.py")
 			break
 		else:
 			continue  
@@ -54,4 +57,4 @@ if __name__ == '__main__':
 #Note : if you run this file individually, then you may receive an error because of the directory structure.
 # 	 To fix this, run this file from the main directory of the project. i.e run knickassistant.py 
 #  or
-#    change the line 44 ( i.e scripts/Hotword/assistant_direct.py) to ("python Hotword/assistant_direct.py") 
+#    change the line 47 i.e ("python scripts/Hotword/awake.py") to ("python Hotword/awake.py")
