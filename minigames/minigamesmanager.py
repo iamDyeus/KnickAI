@@ -10,6 +10,7 @@ def playgame():
     \n3.Skribbl.io
     \n4.Chess
     \n5.Drift Hunters
+    \n6.Ninja.io
 
         OR type "quit" to exit gamemanager.
         or type "help" to get help on how to use gamemanager.
@@ -33,6 +34,9 @@ def playgame():
     elif '5' in uinp or 'Drift' in uinp or 'drift' in uinp or 'Drift Hunters' in uinp or 'drift hunters' in uinp:
         from games import drifthunters
 
+    elif '6' in uinp or 'ninja' in uinp or 'ninja.io' in uinp:
+        from games import ninja
+    
     elif 'help' in uinp or 'Help' in uinp or 'HELP' in uinp:
         print("its so easy already, just type the number in front of the game you want to play")
         print("your such an amazing person, you can't even type the number of the game you want to play")
@@ -46,3 +50,7 @@ def playgame():
         print('\n')
         return playgame()
     time.sleep(3)
+
+
+if __name__ == "__main__":
+    playgame()
