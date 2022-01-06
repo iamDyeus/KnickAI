@@ -51,6 +51,7 @@ All the API's mentioned below are Free
 *   **Youtuber Commands (Youtube studio, Youtube Live Dashboard)** (e.g 'open youtube studio' , 'open youtube live dashboard')
 *   **Integrated with Youtube ViewBot**  (e.g 'open viewbot')
 *   **Can Do Keyword Research** with the help of Google Trends (e.g 'lets do some keyword research')
+*   **Can open Windows Dictation option** (e.g 'i want to dictate')
 
 ### Features
 *   **Supports working in Background and activation on Hotword.** (e.g 'Hibernate' or 'sleep')
